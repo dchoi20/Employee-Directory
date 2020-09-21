@@ -1,0 +1,5 @@
+ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 30px;
+}
