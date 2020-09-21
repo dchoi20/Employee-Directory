@@ -8,7 +8,6 @@ function SearchForm({ employeeSearch }) {
         onChange={employeeSearch}
         name="search"
         type="search"
-        className="form-control"
         placeholder="Search for Employee"
         id="search"
       />

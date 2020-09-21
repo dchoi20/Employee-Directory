@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./EmployeeList.css";
+import "./EmployeeTable.css";
 import API from "../../utils/API";
 import SearchForm from "../SearchForm/searchForm";
 export default function Employees() {
@@ -7,6 +7,10 @@ export default function Employees() {
     employees: [],
     filteredEmployees: [],
   });
+
+  // const [sortName, setSortName] = useState({
+  //   order: true,
+  // });
 
   useEffect(() => {
     API.getUsers().then((res) => {
@@ -29,21 +33,38 @@ export default function Employees() {
     setEmployeeState({ ...employeeState, filteredEmployees: searchResults });
   };
 
+  // const filterName = (e) => {
+  //   let searchResults = [...employeeState.employees];
+  // };
+
   return (
-    <div id="contain">
+    <div id="container">
       <SearchForm employeeSearch={employeeSearch} />
-      {employeeState.filteredEmployees.map((user, i) => (
-        <div>
-          <ul>
-            <img src={user.picture.medium} alt="" />
-            <li>{user.name.first}</li>
-            <li>{user.name.last}</li>
-            <li>{user.cell}</li>
-            <li>{user.email}</li>
-            <li>{user.dob.date}</li>
-          </ul>
-        </div>
-      ))}
+      <table className="highlight centered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Cell Number</th>
+            <th>Email</th>
+            <th>Birthday</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employeeState.filteredEmployees.map((user) => (
+            <tr>
+              <img src={user.picture.medium} alt="" />
+              <td>
+                {`${user.name.first}
+                ${user.name.last}`}
+              </td>
+              <td>{user.cell}</td>
+              <td>{user.email}</td>
+              <td>{new Date(user.dob.date).toLocaleDateString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

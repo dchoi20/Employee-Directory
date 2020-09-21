@@ -1,0 +1,6 @@
+import React from "react";
+import "./Header.css";
+
+export default function Header() {
+  return <h1 id="title">Employee Directory</h1>;
+}
