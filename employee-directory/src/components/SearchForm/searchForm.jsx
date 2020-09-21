@@ -1,11 +1,11 @@
 import React from "react";
 
-function SearchForm({ searchForEmployee }) {
+function SearchForm({ employeeSearch }) {
   return (
     <div>
       <label htmlFor="search">Search:</label>
       <input
-        onChange={searchForEmployee}
+        onChange={employeeSearch}
         name="search"
         type="search"
         className="form-control"

@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./EmployeeList.css";
+import API from "../../utils/API";
+import SearchForm from "../SearchForm/searchForm";
+export default function Employees() {
+  const [employeeState, setEmployeeState] = useState({
+    employees: [],
+    filteredEmployees: [],
+  });
 
-export default function Employees({ employeeSearch }) {
+  useEffect(() => {
+    API.getUsers().then((res) => {
+      setEmployeeState({
+        ...employeeState,
+        employees: res.data.results,
+        filteredEmployees: res.data.results,
+      });
+    });
+  }, []);
+
+  const employeeSearch = (e) => {
+    let searchValue = e.target.value;
+    searchValue = searchValue.toLowerCase();
+    let searchResults = [...employeeState.employees];
+    searchResults = searchResults.filter((employee) => {
+      let fullName = `${employee.name.first}${employee.name.last}`.toLowerCase();
+      return fullName.includes(searchValue);
+    });
+    setEmployeeState({ ...employeeState, filteredEmployees: searchResults });
+  };
+
   return (
     <div id="contain">
-      {employeeSearch.filteredUsers.map((user, i) => (
+      <SearchForm employeeSearch={employeeSearch} />
+      {employeeState.filteredEmployees.map((user, i) => (
         <div>
           <ul>
             <img src={user.picture.medium} alt="" />

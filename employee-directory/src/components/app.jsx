@@ -1,13 +1,11 @@
 import React from "react";
-// import Search from "./searchForm";
-import Employee from "./components/EmployeeContainer";
+import Search from "./SearchForm/searchForm";
+import Employees from "./EmployeeTable/EmployeeList";
 
-function App() {
+export default function App() {
   return (
     <div>
-      <Employee />
+      <Employees />
     </div>
   );
 }
-
-export default App;
