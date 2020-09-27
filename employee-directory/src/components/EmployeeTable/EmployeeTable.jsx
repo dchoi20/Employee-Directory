@@ -8,10 +8,6 @@ export default function Employees() {
     filteredEmployees: [],
   });
 
-  // const [sortName, setSortName] = useState({
-  //   order: true,
-  // });
-
   useEffect(() => {
     API.getUsers().then((res) => {
       setEmployeeState({
@@ -33,9 +29,22 @@ export default function Employees() {
     setEmployeeState({ ...employeeState, filteredEmployees: searchResults });
   };
 
-  // const filterName = (e) => {
-  //   let searchResults = [...employeeState.employees];
-  // };
+  const onSortByName = (e) => {
+    setEmployeeState({
+      ...employeeState,
+      filteredEmployees: employeeState.filteredEmployees.sort((a, b) => {
+        let nameA = a.name.first.toUpperCase();
+        let nameB = b.name.first.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      }),
+    });
+  };
 
   return (
     <div id="container">
@@ -44,7 +53,7 @@ export default function Employees() {
         <thead>
           <tr>
             <th>Image</th>
-            <th>Name</th>
+            <th onClick={(e) => onSortByName(e)}>Name</th>
             <th>Cell Number</th>
             <th>Email</th>
             <th>Birthday</th>
