@@ -10,4 +10,4 @@ https://dchoi20.github.io/Employee-Directory/
 
 ## Screen Grabs
 
-![employee-directory](./images/employee-directory.png)
+<img width="1440" alt="employee-directory" src="https://user-images.githubusercontent.com/60443404/95100781-0f668d80-06f7-11eb-9052-ef9ad572144c.png">
